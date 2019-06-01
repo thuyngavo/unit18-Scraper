@@ -8,14 +8,18 @@
         <div class="card-body">
             <h5 class="title">{{this.title}}</h5>
             <p class="description">{{this.description}}</p>
-            <a href="#" class="btn btn-primary edit"> Note </a>
+            <!-- Button trigger note modal -->
+            <button type="button" class="btn btn-primary note" data-toggle="modal" data-target="#noteModal">
+            Notes
+            </button>
+
             <a href="#" class="btn btn-primary delete"> Delete </a>
         </div>
     </div>
 </div>
 
 {{!-- modal to edit note --}}
-<div class="modal" tabindex="-1" role="dialog">
+<div class="modal" id="noteModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
