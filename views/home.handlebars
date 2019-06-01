@@ -1,0 +1,27 @@
+<br>
+<br>
+
+{{!-- jumbotron --}}
+<div class = "title container">
+    <div class="jumbotron">
+    <h1 class="display-4">News Scraper</h1>
+    <p class="lead">Find news articles you are interested in!</p>
+    <hr class="my-4">
+    <p>Click the button below to get started!</p>
+    <a class="btn btn-primary btn-lg scrape" href="#" role="button">Lets Get Scraping!</a>
+    </div>
+</div>
+
+{{!-- article cards --}}
+<div class= "card container">
+    <div class="card" style="width: 18rem;">
+        <img src={{this.img}} class="card-img-top" alt={{this.title}}>
+        <div class="card-body">
+            <h5 class="title">{{this.title}}</h5>
+            <p class="description">{{this.description}}</p>
+            <a href="#" class="btn btn-primary save"> Save </a>
+        </div>
+    </div>
+</div>
+
+
