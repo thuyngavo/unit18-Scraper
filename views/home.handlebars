@@ -8,18 +8,27 @@
     <p class="lead">Find news articles you are interested in!</p>
     <hr class="my-4">
     <p>Click the button below to get started!</p>
-    <a class="btn btn-primary btn-lg scrape" href="#" role="button">Lets Get Scraping!</a>
+    {{!-- button to begin scraping --}}
+    <button type="button" class="btn btn-primary scrape">Lets get Scraping!</button>
     </div>
 </div>
 
 {{!-- article cards --}}
 <div class= "card container">
     <div class="card" style="width: 18rem;">
+        {{!-- button to remove article --}}
+        <button type="button" class="delete" data-dismiss="modal" aria-label="delete">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{!-- article img --}}
         <img src={{this.img}} class="card-img-top" alt={{this.title}}>
         <div class="card-body">
+            {{!-- article title --}}
             <h5 class="title">{{this.title}}</h5>
+            {{!-- article description --}}
             <p class="description">{{this.description}}</p>
-            <a href="#" class="btn btn-primary save"> Save </a>
+            {{!-- button to savve article --}}
+            <button type="button" class="btn btn-primary save">Save</button>
         </div>
     </div>
 </div>
