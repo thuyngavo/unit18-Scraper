@@ -1,12 +1,41 @@
 {{!-- article cards --}}
 <div class= "card container">
     <div class="card" style="width: 18rem;">
+        <button type="button" class="delete" data-dismiss="modal" aria-label="delete">
+          <span aria-hidden="true">&times;</span>
+        </button>
         <img src={{this.img}} class="card-img-top" alt={{this.title}}>
         <div class="card-body">
             <h5 class="title">{{this.title}}</h5>
             <p class="description">{{this.description}}</p>
-            <a href="#" class="btn btn-primary edit"> Edit Note </a>
+            <a href="#" class="btn btn-primary edit"> Note </a>
             <a href="#" class="btn btn-primary delete"> Delete </a>
         </div>
     </div>
+</div>
+
+{{!-- modal to edit note --}}
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Note</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1"></label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary close" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary save">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
