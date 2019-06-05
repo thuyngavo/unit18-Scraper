@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{!-- link bootstrap  --}}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css">
+    {{!-- link google fonts --}}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cormorant+SC" rel="stylesheet">
     {{!-- link css stylesheet --}}
-    <link rel="stylesheet" href="public/assers/css/style.css">
+    <link rel="stylesheet" href="public/assets/css/style.css">
     <title>Unit 18 | News Scraper</title>
 </head>
 <body>
@@ -18,9 +20,8 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="#">Saved Articles</a>
-      <a class="nav-item nav-link scrape" href="#">Scrape New Articles</a>
+      <a class="nav-item nav-link" href="{{home.handlebars}}">Saved Articles</a>
+      <a class="nav-item nav-link scrape" href="{{views/saved.handlebars}}">Scrape New Articles</a>
     </div>
   </div>
 </nav>
