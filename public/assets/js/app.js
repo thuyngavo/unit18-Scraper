@@ -1,14 +1,112 @@
-// Grab the articles as a json
-$.getJSON("/articles", function(data) {
-  // For each one
+//==================================================================
+//Render articles to page
+//==================================================================
+
+//variable to indicate container for rendering articles
+var articleContainer = $(".article-container");
+
+// empty the article container
+articleContainer.empty();
+
+
+//function to render articles to page
+$.get("/articles").then(function(data) {
+  //loop through each article in database
   for (var i = 0; i < data.length; i++) {
-    // Display the apropos information on the page
-    $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+    //if there are articles
+    if (data && data.length) {
+    //render then to the page
+    renderArticles(data);
+    // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+  } else {
+    //else render empty alert
+    renderEmpty();
+}
   }
 });
 
-// Whenever someone clicks a p tag
-$(document).on("click", "p", function() {
+//function to render articles
+function renderArticles(data) {
+  //variable to hold empty array
+  var articlePanels = [];
+  // loop through articles data and push to article panels array
+  for (var i = 0; i < data.length; i++) {
+      articlePanels.push(createPanel(data[i]));
+  }
+  // once we have all of the HTML for the articles stored in our articlePanels array, append them to the articlePanels container
+  articleContainer.append(articlePanels);
+}
+
+//function to create article cards
+function createPanel(data) {
+  //variable to print articles in card
+  var panel = 
+    $(["<div class='card' style='width: 18rem;'>",
+          "<div class='card-body'>",
+            "<h5 class='card-title'>", data.title, "</h5>",
+            "<p class='card-text'>", data.summary ,"</p>",
+            "<p class='card-text'>", data.summary ,"</p>",
+            "<a href='#' class='card-link'>", data.link, "</a>",
+            "<a href='#' class='card-link delete btn.delete'>Delete</a>",
+            "<a href='#' class='card-link readLink notes'>Notes</a>",
+          "</div>",
+        "</div>"   
+      ].join("")
+    );
+  //attach the article's id
+  panel.data("_id", article._id);
+  //return panel element
+  return panel;
+}
+
+//function to render an emtpy article container
+function renderEmpty() {
+  //variable to print that there are no articles
+  var emptyAlert =
+  $([`<div class='alert alert-warning text-center'>
+        <h4>No articles saved...</h4>
+      </div>
+      <div class='panel panel-default'>
+        <div class='panel-heading text-center'>
+          <h4>Lets go back and scrape some articles.</h4>
+        </div>
+        <div class='panel-body text-center'>
+          <h4><a href='/'>BACK</a></h4>
+        </div>
+      </div>`
+    ].join("")
+  );
+  //render alert html to page
+  articleContainer.append(emptyAlert);
+}
+
+//==================================================================
+//click function to delete article
+//==================================================================
+
+//onclick function to delete saved article
+$(document).on("click", ".btn.delete", function(){
+  //variable to grab article user selects to delete
+  var articleToDelete = $(this).parents(".panel").data();
+
+  //ajax call to initiate delete from db
+  $.ajax({
+    method: "DELETE",
+    url: "/api/title/" + articleToDelete._id
+  }).then(function(data) {
+    //reload page 
+    if (data.ok) {
+        location.reload();
+    }
+});
+});
+
+//==================================================================
+//click functions for notes
+//==================================================================
+
+//onclick function for note button
+$(document).on("click", ".btn.notes", function() {
   // Empty the notes from the note section
   $("#notes").empty();
   // Save the id from the p tag
@@ -41,8 +139,12 @@ $(document).on("click", "p", function() {
     });
 });
 
-// When you click the savenote button
-$(document).on("click", "#savenote", function() {
+//==================================================================
+//click function to edit notes
+//==================================================================
+
+//on click
+$(document).on("click", ".btn.save", function() {
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
 
@@ -71,8 +173,50 @@ $(document).on("click", "#savenote", function() {
 });
 
 
+//==================================================================
+//click function to save notes
+//==================================================================
 
+// //on click
+// $(document).on("click", ".btn.save", function() {
+//   // variable s to grab user input
+//   var noteData;
+//   var newNote = $(".bootbox-body textarea").val().trim();
 
+//   //if there is new input
+//   if (newNote) {
+//       //change current note to new input
+//       noteData = {
+//           _id: $(this).data("article")._id,
+//           noteText: newNote
+//       };
+
+//       $.post("/api/notes", noteData).then(function() {
+//           //close the modal
+//           bootbox.hideAll();
+//       });
+//   }
+// });
+
+//==================================================================
+//click function to delete notes
+//==================================================================
+
+//on click
+$(document).on("click", ".btn.note-delete" , function() {
+
+    //variable to grab id of note selected
+    var noteToDelete = $(this).data("_id");
+
+    //ajax call to delete from db
+    $.ajax({
+      url: "/api/notes/" + noteToDelete,
+      method: "DELETE"
+  }).then(function() {
+      //hide the modal
+      bootbox.hideAll();
+  });
+});
 
 
 

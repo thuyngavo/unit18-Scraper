@@ -5,7 +5,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 // create a new UserSchema object
-var articleSchema = new Schema({
+var ArticleSchema = new Schema({
     // `title`= String, required
   title: {
         type: String,
