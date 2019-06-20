@@ -28,9 +28,35 @@
   </div>
 </nav>
 
+  <div class="container">
     {{{body}}}
-    
-    {{!-- container to hold articles --}}
+  </div>
+  
+
+  {{!-- footer --}}
+<footer class="footer">
+    <div class="container">
+        <p>New York Times Mongo Scraper 2019</p>
+    </div>
+</footer>
+
+  {{!-- note display window --}}
+  <div id="addnote">
+		<div id="note-displayer">
+			<h2>Add/Edit Notes</h2>
+			<h3><span id="article-title"></span></h3>
+			<div id="note">
+				<label for="note-title">Title: </label><br>
+				<input type="text" placeholder="Title" name="title" id="note-title"><br>
+				<label for="note-body">Body</label><br>
+				<textarea rows="7" placeholder="Note" id="note-body"></textarea><br>
+				<button type="submit" id="add-note">Save</button>
+				<button type="button" id="close-note">Close</button>
+			</div>
+		</div>
+	</div>
+  
+    {{!-- link script source --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="app.js"></script>
 

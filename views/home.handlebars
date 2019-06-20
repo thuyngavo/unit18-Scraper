@@ -25,15 +25,23 @@
 
 
 {{!-- container to hold articles --}}
-<div class="container-fluid article-container">
+{{#each articles}}
+<div class="story-body" id={{this._id}}>
+<h2>
+<a href="{{this.link}}" target="_blank">{{this.title}}</a>
+<form action="/save/{{this._id}}" method="POST">
+<button type="submit" class="status" value="{{this.status}}">{{this.status}}</button>
+{{#unless this.note}}
+<button type="button" class="addnote-button" value="{{this._id}}">Add A Note</button>
+{{/unless}}
+{{#if this.note}}
+<button type="button" class="addnote-button" value="{{this._id}}">Edit Note</button>
+{{/if}}
+</form>
+</h2>
+<summary>{{this.summary}}</summary>
 </div>
-
-{{!-- footer --}}
-<footer class="footer">
-    <div class="container">
-        <p>New York Times Mongo Scraper 2019</p>
-    </div>
-</footer>
+{{/each}}
 
 {{!-- link script source --}}
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
